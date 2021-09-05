@@ -7,7 +7,7 @@ import logging
 
 from yowsup.stacks import YowStackBuilder
 from yowsup.layers import YowLayerEvent
-from yowsup.layers.auth import AuthError
+from yowsup.layers.auth import YowAuthenticationProtocolLayer
 from yowsup.layers.network import YowNetworkLayer
 
 from YowsupHelper.Interfacer import Interfacer
@@ -51,6 +51,6 @@ class YowsupThread(QThread):
         self.stack.broadcastEvent(YowLayerEvent(YowNetworkLayer.EVENT_STATE_CONNECT))
         try:
             self.stack.loop()
-        except AuthError as e:
+        except YowAuthenticationProtocolLayer as e:
             print("Authentication Error: %s" % e)
         print("Thread Restarting")
